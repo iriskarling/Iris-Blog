@@ -33,6 +33,7 @@ body {
     radial-gradient(circle at 85% 14%, rgba(172, 229, 255, 0.34), transparent 18%),
     linear-gradient(180deg, #f4fbff 0%, #edf7ff 48%, #eaf5ff 100%);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 body::before,
@@ -777,6 +778,11 @@ h3 {
 }
 
 @media (max-width: 980px) {
+  .page-shell {
+    width: min(100% - 24px, 1180px);
+    padding: 24px;
+  }
+
   .hero-grid,
   .intro-grid,
   .method-grid,
@@ -791,6 +797,23 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .project-case {
+    gap: 18px;
+  }
+
+  .project-side {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    padding-right: 0;
+  }
+
+  .project-highlight {
+    width: min(240px, 100%);
+    margin-bottom: 0;
+  }
+
   .hero-metrics {
     grid-template-columns: 1fr;
   }
@@ -802,30 +825,62 @@ h3 {
   .timeline-date {
     padding-top: 0;
   }
+
+  .section {
+    padding: 52px 0 0;
+  }
+
+  .project-body h3,
+  .project-summary {
+    max-width: none;
+  }
 }
 
 @media (max-width: 720px) {
   .page-shell {
-    width: min(100% - 16px, 1180px);
-    padding: 18px;
-    border-radius: 22px;
+    width: calc(100% - 12px);
+    margin: 12px auto;
+    padding: 14px;
+    border-radius: 18px;
   }
 
   .topbar {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 12px;
   }
 
   .nav-links {
     justify-content: flex-start;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    gap: 8px;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+    padding: 9px 12px;
   }
 
   h1 {
     max-width: none;
   }
 
+  .section {
+    padding: 40px 0 0;
+  }
+
   .project-card {
-    padding: 22px;
+    padding: 18px;
   }
 
   .mini-metrics {
@@ -834,6 +889,89 @@ h3 {
 
   .hero-copy,
   .hero-card {
-    padding: 24px;
+    padding: 20px;
+  }
+
+  .intro-grid article,
+  .method-grid article,
+  .writing-card,
+  .timeline-content,
+  .showcase-card,
+  .project-showcase {
+    padding: 18px;
+  }
+
+  .hero-grid {
+    gap: 18px;
+  }
+
+  .hero-actions {
+    margin: 22px 0 24px;
+  }
+
+  .button,
+  .showcase-link {
+    width: 100%;
+  }
+
+  .hero-metrics {
+    gap: 10px;
+  }
+
+  .project-body h3 {
+    font-size: 1.5rem;
+  }
+
+  .project-summary,
+  .section-subtitle,
+  .hero-text {
+    font-size: 0.98rem;
+  }
+
+  .case-block {
+    padding: 16px;
+  }
+
+  .timeline-content {
+    padding: 18px;
+  }
+
+  .showcase-card h4 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand {
+    font-size: 0.95rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 11vw, 2.8rem);
+    line-height: 1.06;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    line-height: 1.12;
+  }
+
+  .hero-copy,
+  .hero-card,
+  .project-card,
+  .showcase-card,
+  .intro-grid article,
+  .method-grid article,
+  .writing-card,
+  .timeline-content {
+    border-radius: 20px;
+  }
+
+  .hero-metrics li {
+    padding: 15px 14px;
+  }
+
+  .project-highlight strong {
+    font-size: 1.45rem;
   }
 }

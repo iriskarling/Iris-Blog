@@ -128,6 +128,56 @@
       h1 { font-size: 30px; }
     }
   </style>
+  <style>
+    body { overflow-x: hidden; }
+
+    @media (max-width: 720px) {
+      .page { padding: 18px 14px 44px; }
+      .hero { padding: 28px 20px 24px; border-radius: 22px; }
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .metrics,
+      .diagram-caption,
+      .footer-value .bullets,
+      .toc { grid-template-columns: 1fr; }
+      .problem-chain,
+      .logic-flow { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); }
+      .section { padding: 20px 16px; border-radius: 20px; }
+      .section-title,
+      .diagram-head { flex-direction: column; }
+      .hero-card,
+      .card,
+      .chain-box,
+      .logic-box,
+      .metric,
+      .caption-box { padding: 16px; }
+      .toc a { padding: 12px 14px; }
+      .tag { white-space: normal; height: auto; min-height: 34px; }
+      .diagram-frame { padding: 10px; }
+      .diagram-frame img { min-width: 640px; width: 640px; }
+      h1 { font-size: 28px; line-height: 1.16; }
+      .subtitle,
+      .section-title p { font-size: 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 12px 10px 32px; }
+      .hero { padding: 22px 16px 18px; border-radius: 18px; }
+      .section { padding: 16px 12px; }
+      .hero-card,
+      .card,
+      .chain-box,
+      .logic-box,
+      .metric { padding: 14px; }
+      .diagram-frame img { min-width: 520px; width: 520px; }
+      h1 { font-size: 24px; }
+      .section-title h2 { font-size: 24px; }
+      .metric .num { font-size: 28px; }
+    }
+  </style>
 </head>
 <body>
   <main class="page">
