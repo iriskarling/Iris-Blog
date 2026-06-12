@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>基于语音中心的“一户一档”客户经营智能体｜项目展示页</title>
+<style>
+  :root{
+    --bg:#f4f7fb;--card:#ffffff;--ink:#152033;--muted:#667085;--line:#d9e2ef;
+    --blue:#1f5eff;--blue2:#eaf1ff;--cyan:#0ea5e9;--green:#12b76a;--orange:#f79009;--purple:#7a5af8;--red:#f04438;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(135deg,#f7faff 0%,#eef4ff 46%,#f7f8fb 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);}
+  .page{width:1280px;margin:28px auto;padding:34px;background:var(--card);border:1px solid rgba(31,94,255,.12);border-radius:28px;box-shadow:0 24px 70px rgba(30,57,110,.16);position:relative;overflow:hidden;}
+  .page:before{content:"";position:absolute;right:-180px;top:-180px;width:420px;height:420px;background:radial-gradient(circle,rgba(31,94,255,.16),rgba(31,94,255,0) 68%)}
+  .header{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;position:relative;z-index:1;margin-bottom:20px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--blue2);color:#1746b8;font-size:14px;font-weight:800;letter-spacing:.3px;}
+  h1{font-size:35px;line-height:1.18;margin:14px 0 10px;font-weight:900;letter-spacing:-.6px;}
+  .subtitle{font-size:17px;line-height:1.62;color:var(--muted);max-width:840px;margin:0;}
+  .role-card{width:312px;padding:18px;border-radius:20px;background:linear-gradient(180deg,#102a56,#173e79);color:#fff;box-shadow:0 14px 32px rgba(23,62,121,.26);}
+  .role-card .label{font-size:13px;opacity:.72;margin-bottom:8px}.role-card .role{font-size:20px;font-weight:850;line-height:1.35;margin-bottom:14px;}
+  .role-tags{display:flex;flex-wrap:wrap;gap:8px}.role-tags span{font-size:12px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.14)}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;position:relative;z-index:1;}
+  .card{border:1px solid var(--line);border-radius:22px;background:#fff;padding:20px;box-shadow:0 8px 24px rgba(23,46,93,.06);}
+  .card h2{font-size:18px;margin:0 0 14px;display:flex;align-items:center;gap:9px;}
+  .bar{width:5px;height:18px;border-radius:6px;background:var(--blue);display:inline-block;}
+  .pain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .pain{padding:13px;border-radius:16px;background:#f7f9fc;border:1px solid #e8eef7;min-height:88px;}
+  .pain strong{display:block;font-size:14px;margin-bottom:7px;color:#22304a}.pain p{font-size:12px;line-height:1.45;color:var(--muted);margin:0;}
+  .flow{display:flex;align-items:center;gap:8px;margin-top:8px;}
+  .step{flex:1;min-height:76px;padding:12px 9px;border-radius:16px;background:linear-gradient(180deg,#f9fbff,#f2f6ff);border:1px solid #dce7fb;text-align:center;}
+  .step .no{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:#1f5eff;color:#fff;font-size:12px;font-weight:800;margin-bottom:6px;}
+  .step div:last-child{font-size:12px;line-height:1.35;font-weight:800;color:#263a5e}.arrow{font-size:18px;color:#8aa3d5;font-weight:900;}
+  .capabilities{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}.cap{padding:14px;border-radius:16px;border:1px solid #e8eef7;background:#fbfcff;}
+  .cap b{display:block;font-size:14px;margin-bottom:6px}.cap span{font-size:12px;color:var(--muted);line-height:1.45;display:block;}
+  .tags{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}.tagbox{padding:13px;border-radius:16px;background:#f8fafc;border:1px solid #e7edf6;}
+  .tagbox b{font-size:14px;display:block;margin-bottom:8px}.pills{display:flex;flex-wrap:wrap;gap:6px}.pills span{font-size:11px;border-radius:999px;padding:5px 8px;background:#fff;border:1px solid #e1e8f2;color:#435066;}
+  .profile-summary{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.summarybox{padding:13px;border-radius:16px;background:linear-gradient(180deg,#fff,#f8fbff);border:1px solid #dfe8f6;min-height:120px}.summarybox b{font-size:14px;display:block;margin-bottom:8px;color:#22304a}.summarybox p{font-size:12px;line-height:1.55;color:#566274;margin:0}.summary-note{margin-top:12px;padding:12px;border-radius:14px;background:#eef4ff;color:#244170;font-size:12px;line-height:1.6;font-weight:700;}
+  .section-title{margin:24px 0 14px;font-size:22px;font-weight:900;display:flex;align-items:center;gap:10px;position:relative;z-index:1}.section-title:before{content:"";width:6px;height:22px;border-radius:8px;background:var(--blue);}
+  .metric-board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;z-index:1;}.metric-card{border:1px solid #e2eaf5;border-radius:18px;background:linear-gradient(180deg,#fff,#f9fbff);padding:15px;min-height:210px;}
+  .metric-card:nth-child(1){border-top:5px solid var(--cyan)}.metric-card:nth-child(2){border-top:5px solid var(--purple)}.metric-card:nth-child(3){border-top:5px solid var(--green)}.metric-card:nth-child(4){border-top:5px solid var(--orange)}.metric-card:nth-child(5){border-top:5px solid var(--blue)}
+  .metric-card h3{font-size:15px;margin:0 0 10px}.metric-card ul{margin:0;padding-left:16px;font-size:12px;color:#566274;line-height:1.65}.metric-card .formula{margin-top:10px;padding:9px;border-radius:12px;background:#eef4ff;color:#244170;font-size:11px;line-height:1.45;font-weight:700;}
+  .three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;z-index:1;}.logic-card{border:1px solid #e3ebf6;border-radius:20px;background:#fff;padding:18px;box-shadow:0 8px 22px rgba(23,46,93,.05);}
+  .logic-card h3{margin:0 0 12px;font-size:17px;display:flex;align-items:center;gap:8px}.num{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:#1f5eff;color:#fff;font-size:12px;font-weight:900;}
+  .logic-card p{font-size:12px;color:var(--muted);line-height:1.65;margin:0 0 10px}.logic-list{display:grid;gap:8px}.logic-list div{padding:10px;border-radius:13px;background:#f8fafc;border:1px solid #e7edf6;font-size:12px;line-height:1.5;color:#435066}.logic-list b{color:#1f2d45}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative;z-index:1;}.compare-card{padding:18px;border-radius:20px;border:1px solid #e3ebf6;background:#fff;}
+  .compare-card.short{border-left:6px solid var(--orange)}.compare-card.long{border-left:6px solid var(--green)}.compare-card h3{font-size:17px;margin:0 0 12px}.compare-table{width:100%;border-collapse:separate;border-spacing:0 8px;}
+  .compare-table td{font-size:12px;line-height:1.45;padding:9px 10px;background:#f8fafc;border-top:1px solid #e6edf6;border-bottom:1px solid #e6edf6;vertical-align:top}.compare-table td:first-child{width:86px;font-weight:800;color:#263a5e;border-left:1px solid #e6edf6;border-radius:12px 0 0 12px}.compare-table td:last-child{color:#566274;border-right:1px solid #e6edf6;border-radius:0 12px 12px 0}
+  .timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;position:relative;z-index:1;}.stage{padding:13px;border-radius:16px;background:#f8fbff;border:1px solid #dfe8f6;min-height:118px}.stage b{display:block;font-size:13px;margin-bottom:7px;color:#22304a}.stage span{font-size:11px;color:var(--muted);line-height:1.5;display:block}
+  .example{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}.ex{padding:13px;border-radius:16px;background:#fff;border:1px dashed #b9c9e4}.ex .quote{font-size:12px;line-height:1.55;color:#263a5e;margin-bottom:9px}.ex .result{font-size:12px;line-height:1.55;color:#566274}.ex b{color:#152033}
+  .value-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px;position:relative;z-index:1;}.value{padding:16px;border-radius:18px;background:linear-gradient(180deg,#ffffff,#f8fbff);border:1px solid #dfe8f6;min-height:112px;}.value .icon{font-size:22px;margin-bottom:8px}.value b{display:block;font-size:15px;margin-bottom:6px}.value p{margin:0;color:var(--muted);font-size:12px;line-height:1.5;}
+
+  .prompt-section{display:grid;grid-template-columns:.9fr 1.1fr;gap:16px;position:relative;z-index:1;}
+  .prompt-card{border:1px solid #e3ebf6;border-radius:20px;background:#fff;padding:18px;box-shadow:0 8px 22px rgba(23,46,93,.05);}
+  .prompt-card h3{font-size:17px;margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+  .prompt-list{display:grid;gap:8px}.prompt-list div{padding:10px;border-radius:13px;background:#f8fafc;border:1px solid #e7edf6;font-size:12px;line-height:1.55;color:#435066}.prompt-list b{color:#1f2d45}
+  .prompt-code{background:#0f172a;color:#dbeafe;border-radius:18px;padding:16px;max-height:560px;overflow:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:11px;line-height:1.65;white-space:pre-wrap;border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);}
+  .prompt-code .muted{color:#93a4bd}.prompt-note{margin-top:12px;padding:12px;border-radius:14px;background:#eef4ff;color:#244170;font-size:12px;line-height:1.6;font-weight:700;}
+  .prompt-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.mini{padding:12px;border-radius:14px;background:#fbfcff;border:1px solid #e8eef7}.mini b{display:block;font-size:13px;margin-bottom:6px}.mini span{font-size:11px;line-height:1.5;color:#566274;display:block}
+
+  .demo-section{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;z-index:1;}
+  .demo-card{border:1px solid #e3ebf6;border-radius:20px;background:#fff;padding:18px;box-shadow:0 8px 22px rgba(23,46,93,.05);}
+  .demo-card h3{font-size:17px;margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+  .demo-transcript{background:#f8fafc;border:1px solid #e7edf6;border-radius:16px;padding:14px;display:grid;gap:10px;max-height:420px;overflow:auto;}
+  .talk{display:flex;gap:8px;align-items:flex-start;}
+  .speaker{flex:0 0 48px;font-size:12px;font-weight:900;color:#fff;border-radius:999px;padding:5px 8px;text-align:center;}
+  .speaker.advisor{background:#1f5eff}.speaker.customer{background:#12b76a}
+  .bubble{flex:1;font-size:12px;line-height:1.58;color:#344054;background:#fff;border:1px solid #e4eaf3;border-radius:13px;padding:9px 11px;}
+  .demo-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
+  .meta-item{padding:9px 10px;border-radius:13px;background:#f8fbff;border:1px solid #dfe8f6;}
+  .meta-item b{display:block;font-size:11px;color:#667085;margin-bottom:4px}.meta-item span{font-size:12px;font-weight:800;color:#263a5e}
+  .demo-output{display:grid;gap:10px;}
+  .demo-summary{padding:13px;border-radius:16px;background:#eef4ff;color:#244170;font-size:12px;line-height:1.65;border:1px solid #d7e4ff;}
+  .demo-tags{display:grid;gap:8px;}
+  .demo-tag{display:grid;grid-template-columns:1.2fr .8fr .55fr;gap:8px;align-items:center;padding:10px;border-radius:14px;background:#f8fafc;border:1px solid #e7edf6;}
+  .demo-tag b{font-size:12px;color:#1f2d45}.demo-tag span{font-size:11px;color:#566274;line-height:1.4}
+  .score{height:8px;border-radius:99px;background:#e6edf6;overflow:hidden}.score i{display:block;height:100%;background:linear-gradient(90deg,#12b76a,#1f5eff)}
+  .badge-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.badge{font-size:11px;padding:5px 8px;border-radius:999px;background:#fff;border:1px solid #dfe8f6;color:#435066;font-weight:700;}
+  .demo-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}.demo-action{padding:11px;border-radius:14px;background:#fff7ed;border:1px solid #fed7aa;font-size:12px;line-height:1.45;color:#7c2d12;}
+  .demo-json{background:#0f172a;color:#dbeafe;border-radius:16px;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:11px;line-height:1.6;white-space:pre-wrap;max-height:310px;overflow:auto;border:1px solid rgba(255,255,255,.08);}
+  .demo-btn{border:0;border-radius:999px;background:#1f5eff;color:#fff;font-weight:900;padding:10px 14px;cursor:pointer;box-shadow:0 8px 18px rgba(31,94,255,.18);}
+  .demo-btn.secondary{background:#102a56}.demo-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.demo-toolbar p{font-size:12px;color:#667085;line-height:1.5;margin:0}
+  .hidden-json{display:none}.show-json{display:block}
+
+  .footer{margin-top:18px;padding:14px 18px;border-radius:18px;background:#102a56;color:#dce8ff;display:flex;justify-content:space-between;align-items:center;gap:18px;position:relative;z-index:1;}.footer strong{color:#fff}.footer span{font-size:13px;line-height:1.55}.footer .right{white-space:nowrap;color:#b7ccff;font-size:13px;}
+  @media print{body{background:#fff}.page{margin:0;width:100%;border-radius:0;box-shadow:none}.section-title{break-after:avoid}}
+</style>
+</head>
+<body>
+  <main class="page">
+    <section class="header">
+      <div>
+        <div class="eyebrow">AI 产品项目展示｜财富管理 × 语音中心 × 客户经营智能体</div>
+        <h1>基于语音中心的“一户一档”客户经营智能体</h1>
+        <p class="subtitle">将财富顾问与客户的电话录音、语音聊天等非结构化沟通内容，通过 ASR 转写与大模型分析转化为客户意图标签、沟通摘要和待跟进事项，沉淀动态客户档案，支撑顾问精细化经营。</p>
+      </div>
+      <aside class="role-card">
+        <div class="label">我的职责</div>
+        <div class="role">AI 产品方案设计<br/>语音能力对接<br/>标签体系与智能体流程规划</div>
+        <div class="role-tags"><span>ASR 转写</span><span>LLM 抽取</span><span>客户画像</span><span>指标体系</span><span>反馈闭环</span></div>
+      </aside>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2><i class="bar"></i>业务痛点与项目目标</h2>
+        <div class="pain-grid">
+          <div class="pain"><strong>沟通信息沉淀不完整</strong><p>大量录音和语音聊天未被结构化利用，客户真实需求难以长期沉淀。</p></div>
+          <div class="pain"><strong>客户标签更新不及时</strong><p>传统画像偏静态，难以及时反映客户近期意图、资金计划和偏好变化。</p></div>
+          <div class="pain"><strong>顾问跟进效率低</strong><p>优先跟进对象、话术和服务动作依赖人工判断，筛选成本高。</p></div>
+          <div class="pain"><strong>经营过程难评估</strong><p>沟通过程、需求变化和服务效果缺少结构化数据支撑。</p></div>
+        </div>
+        <h2 style="margin-top:20px"><i class="bar"></i>端到端产品链路</h2>
+        <div class="flow">
+          <div class="step"><span class="no">1</span><div>语音录音 / 聊天接入</div></div><span class="arrow">→</span>
+          <div class="step"><span class="no">2</span><div>ASR 转写<br/>角色区分</div></div><span class="arrow">→</span>
+          <div class="step"><span class="no">3</span><div>文本清洗<br/>结构化处理</div></div><span class="arrow">→</span>
+          <div class="step"><span class="no">4</span><div>大模型意图抽取</div></div><span class="arrow">→</span>
+          <div class="step"><span class="no">5</span><div>标签映射<br/>画像更新</div></div><span class="arrow">→</span>
+          <div class="step"><span class="no">6</span><div>摘要待办<br/>顾问确认</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><i class="bar"></i>智能体核心能力</h2>
+        <div class="capabilities">
+          <div class="cap"><b>会话理解</b><span>识别产品咨询、市场沟通、业务办理、风险提示、投诉反馈等场景。</span></div>
+          <div class="cap"><b>隐含意图识别</b><span>从“稳一点”“下个月要用钱”等自然表达中识别真实需求。</span></div>
+          <div class="cap"><b>标签抽取</b><span>将客户表达映射为标准标签，并保留触发语句与置信度。</span></div>
+          <div class="cap"><b>沟通摘要</b><span>生成本次沟通主题、主要诉求、疑虑和顾问答复。</span></div>
+          <div class="cap"><b>待办生成</b><span>识别发送资料、回访、权限开通、风险测评等后续动作。</span></div>
+          <div class="cap"><b>反馈学习</b><span>顾问确认、修改或删除标签，反哺提示词与抽取策略优化。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="section-title">客户标签体系：核心经营标签 + 沟通档案总结项</h2>
+    <section class="card">
+      <div class="summary-note" style="margin-top:0;margin-bottom:12px">
+        调整后，客户画像主标签只保留可用于长期经营和客户分层的 4 类：投资兴趣、产品偏好、风险倾向、资金计划；服务需求、异议顾虑、流失风险、待跟进事项不再作为客户标签长期沉淀，而是在“用户沟通展示档案”中作为本次沟通总结项展示，便于顾问快速阅读和执行。
+      </div>
+      <div class="tags">
+        <div class="tagbox"><b>投资兴趣</b><div class="pills"><span>基金关注</span><span>ETF 关注</span><span>港股通关注</span><span>两融关注</span></div></div>
+        <div class="tagbox"><b>产品偏好</b><div class="pills"><span>稳健理财</span><span>短期限</span><span>高流动性</span><span>低波动</span></div></div>
+        <div class="tagbox"><b>风险倾向</b><div class="pills"><span>风险敏感</span><span>低风险偏好</span><span>中等波动</span><span>保本诉求</span></div></div>
+        <div class="tagbox"><b>资金计划</b><div class="pills"><span>有闲置资金</span><span>计划调仓</span><span>近期赎回</span><span>短期用款</span></div></div>
+      </div>
+      <div class="profile-summary">
+        <div class="summarybox"><b>服务需求</b><p>归纳客户希望获得的服务方式或支持内容，例如资料发送、操作指导、定期资讯、持续跟进等，展示在本次沟通档案中。</p></div>
+        <div class="summarybox"><b>异议顾虑</b><p>沉淀客户在本次沟通中的疑虑点，例如担心亏损、费用敏感、流动性顾虑、不理解产品等，辅助顾问下次沟通。</p></div>
+        <div class="summarybox"><b>流失风险</b><p>识别负面情绪、资产转出、竞品比较、问题未解决等风险信号，作为沟通提醒和经营预警，不直接固化为客户标签。</p></div>
+        <div class="summarybox"><b>待跟进事项</b><p>结构化展示下一步服务动作，例如发送资料、权限开通、风险测评、约定回访等，进入顾问任务清单。</p></div>
+      </div>
+      <div class="example">
+        <div class="ex"><div class="quote">客户：“最近港股行情怎么样？港股通怎么开？”</div><div class="result"><b>客户标签：</b>投资兴趣-港股通关注。<br/><b>沟通档案：</b>待跟进事项-发送开通流程与风险提示材料。</div></div>
+        <div class="ex"><div class="quote">客户：“有没有稳一点、收益比存款高一点的产品？”</div><div class="result"><b>客户标签：</b>产品偏好-稳健理财、风险倾向-低风险偏好。<br/><b>沟通档案：</b>异议顾虑-担心亏损，需顾问解释产品波动与适当性。</div></div>
+        <div class="ex"><div class="quote">客户：“这笔钱下个月可能要用，先不买长期产品。”</div><div class="result"><b>客户标签：</b>资金计划-短期用款、产品偏好-高流动性。<br/><b>沟通档案：</b>服务需求-推荐短期限/高流动性备选方案。</div></div>
+      </div>
+    </section>
+
+    <h2 class="section-title">指标体系设计：质量、使用、经营三层闭环</h2>
+    <section class="metric-board">
+      <div class="metric-card"><h3>1. 语音识别质量</h3><ul><li>ASR 转写准确率</li><li>金融术语识别准确率</li><li>角色区分准确率</li><li>转写失败率</li><li>平均耗时</li></ul><div class="formula">目标：保证后续标签抽取的输入质量，确保语音内容能够稳定、准确地转化为可分析文本。</div></div>
+      <div class="metric-card"><h3>2. 标签抽取质量</h3><ul><li>标签准确率 Precision</li><li>标签召回率 Recall</li><li>人工确认率 / 修改率</li></ul><div class="formula">准确率 = 顾问确认正确标签数 / AI 生成标签数；召回率通过抽样标注集评估。</div></div>
+      <div class="metric-card"><h3>3. 顾问使用效果</h3><ul><li>客户档案查看率</li><li>沟通摘要使用率</li><li>标签采纳率</li><li>待办事项完成率</li></ul><div class="formula">看产品是否真正进入顾问工作流，而不是只停留在模型效果层。</div></div>
+      <div class="metric-card"><h3>4. 业务经营价值</h3><ul><li>客户触达转化率</li><li>产品咨询转化率</li><li>权限开通转化率</li><li>高价值客户覆盖率</li><li>潜在流失召回率</li><li>客户资产留存情况</li></ul><div class="formula">对比使用智能体前后，观察跟进效率、触达质量和客户经营结果变化。</div></div>
+    </section>
+
+    <h2 class="section-title">如何提高标签准确性：规则约束 + 模型抽取 + 人工反馈</h2>
+    <section class="three-col">
+      <div class="logic-card"><h3><span class="num">1</span>输入侧提质</h3><p>标签准确性首先取决于语音转写与文本结构化质量，因此在进入大模型前先做系统侧预处理，避免把过多辅助信息直接塞进 Prompt。</p><div class="logic-list"><div><b>金融热词优化：</b>港股通、两融、ETF、固收、风险测评等术语加入热词库。</div><div><b>输入前过滤：</b>噪音、重叠说话、异常转写等问题优先在系统侧处理；Prompt 不额外传入低置信度片段，减少上下文占用。</div><div><b>角色区分：</b>优先基于客户发言生成画像，顾问话术仅作为上下文辅助。</div></div></div>
+      <div class="logic-card"><h3><span class="num">2</span>抽取侧约束</h3><p>避免模型“自由发挥”，通过标准标签口径、置信度、证据句和强弱意图区分控制输出边界。</p><div class="logic-list"><div><b>标签字典：</b>每个标签配置定义、适用条件、排除条件、示例话术。</div><div><b>证据约束：</b>每个标签必须返回触发语句、对话轮次、来源通话和置信度。</div><div><b>强弱意图：</b>明确购买/开通为强意图，咨询/犹豫/泛化关注为弱意图。</div></div></div>
+      <div class="logic-card"><h3><span class="num">3</span>闭环侧校准</h3><p>通过顾问确认和抽样标注，持续发现误判、漏判和口径不一致问题，反向优化模型策略。</p><div class="logic-list"><div><b>人工确认：</b>高影响标签进入画像前需顾问确认，低置信度标签只做提示。</div><div><b>样本复盘：</b>按高频标签、低准确标签、投诉/流失等高风险场景定期抽检。</div><div><b>版本迭代：</b>Prompt、标签字典、规则阈值、热词库分版本发布并做效果对比。</div></div></div>
+    </section>
+
+    <h2 class="section-title">如何区分短期意图与长期偏好：标签分层、有效期与交叉验证</h2>
+    <section class="compare">
+      <div class="compare-card short">
+        <h3>短期意图标签：服务“下一次跟进动作”</h3>
+        <table class="compare-table">
+          <tr><td>定义</td><td>客户在某次沟通中表达的即时需求、阶段性计划或待办事项。</td></tr>
+          <tr><td>示例</td><td>“下个月要用钱”“这周想了解港股通”“先发资料看看”“最近不买长期产品”。</td></tr>
+          <tr><td>依据</td><td>单次会话即可触发，但必须保存触发语句、生成时间、来源通话和置信度。</td></tr>
+          <tr><td>有效期</td><td>通常设置为 7 / 30 / 90 天，到期自动降权或失效，避免短期事件固化为长期画像。</td></tr>
+          <tr><td>使用</td><td>用于待办提醒、近期触达、下次回访话术、短周期客户分群。</td></tr>
+        </table>
+      </div>
+      <div class="compare-card long">
+        <h3>长期偏好标签：服务“客户画像与经营策略”</h3>
+        <table class="compare-table">
+          <tr><td>定义</td><td>客户在多次沟通、交易行为或顾问确认中稳定体现出的投资偏好、风险倾向和服务偏好。</td></tr>
+          <tr><td>示例</td><td>长期偏好稳健理财、持续关注 ETF、风险敏感、偏好电话沟通、对市场观点敏感。</td></tr>
+          <tr><td>依据</td><td>需要多次会话重复出现，或与交易行为、资产配置、风险等级、顾问确认相互印证。</td></tr>
+          <tr><td>有效期</td><td>长期保留但动态降权；当新证据持续反向出现时，触发标签更新或冲突提醒。</td></tr>
+          <tr><td>使用</td><td>用于客户画像、内容推荐、产品适配前置筛选、长期经营策略和服务分层。</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <h2 class="section-title">标签生命周期：避免“一次对话决定长期画像”</h2>
+    <section class="timeline">
+      <div class="stage"><b>1. 生成候选标签</b><span>基于客户原话、上下文和标签字典生成候选标签，不直接默认进入核心画像。</span></div>
+      <div class="stage"><b>2. 计算置信度</b><span>结合 ASR 置信度、意图强度、证据完整性、标签冲突情况给出分数。</span></div>
+      <div class="stage"><b>3. 判断标签类型</b><span>区分短期意图、长期偏好、待办事项、风险信号和服务需求。</span></div>
+      <div class="stage"><b>4. 顾问确认修正</b><span>高影响标签进入画像前由顾问确认；修改结果沉淀为训练与评估样本。</span></div>
+      <div class="stage"><b>5. 有效期与降权</b><span>短期标签到期失效，长期标签按新旧证据动态调整权重。</span></div>
+      <div class="stage"><b>6. 业务动作验证</b><span>通过触达、转化、客户反馈和顾问采纳情况验证标签是否真正有经营价值。</span></div>
+    </section>
+
+
+    <h2 class="section-title">一户一档提示词设计：可解释、可校验、可运营的结构化抽取</h2>
+    <section class="prompt-section">
+      <div class="prompt-card">
+        <h3><span class="num">P</span>提示词设计原则</h3>
+        <div class="prompt-list">
+          <div><b>角色限定：</b>模型只作为“财富管理会话分析助手”，负责抽取意图、标签、摘要和待办，不直接给客户投资建议。</div>
+          <div><b>输入轻量化：</b>只传入客户基础信息、已有客户标签、标准标签字典和本次 ASR 转写文本；不传通话元数据、历史沟通摘要和 ASR 低置信度片段，避免占用过多上下文窗口。</div>
+          <div><b>类别显式化：</b>Prompt 中明确要求识别 8 类信息，其中投资兴趣、产品偏好、风险倾向、资金计划进入客户标签；服务需求、异议顾虑、流失风险、待跟进事项进入沟通档案总结项。</div>
+          <div><b>字典映射约束：</b>模型必须先理解客户原话含义，再按标签字典中的类别、标签名、定义、触发条件和排除条件进行匹配；不允许凭相似词直接生成标签。</div>
+          <div><b>标签强约束：</b>客户标签只能从标准标签字典中选择；确需新增时必须放入“候选新标签”，不能直接进入客户画像。</div>
+          <div><b>证据可追溯：</b>每个标签必须返回客户原话、对话轮次、置信度和生成理由，便于顾问判断；来源信息由系统侧记录，不放入 Prompt。</div>
+          <div><b>短长分离：</b>一次会话优先生成短期意图或长期偏好候选；长期偏好必须由已有标签、业务行为或顾问确认交叉验证。</div>
+          <div><b>合规边界：</b>不输出买卖建议、不承诺收益、不判断产品适当性结论；建议动作必须由顾问确认后执行。</div>
+        </div>
+        <div class="prompt-note">
+          设计目标：用“轻量输入 + 强约束输出”替代大段历史上下文堆叠，让模型聚焦本次会话证据，输出带证据、带置信度、带生命周期的客户经营数据，同时降低上下文窗口压力。
+        </div>
+        <div class="prompt-mini-grid">
+          <div class="mini"><b>输入</b><span>客户基础信息、已有客户标签、标准标签字典、本次 ASR 转写文本。历史摘要和低置信度片段不进入 Prompt。</span></div>
+          <div class="mini"><b>处理</b><span>先识别 8 类信息，再按标签字典完成语义映射；4 类核心经营标签入库，其余 4 类作为沟通档案总结项。</span></div>
+          <div class="mini"><b>输出</b><span>JSON 结构：客户标签、证据句、匹配规则、置信度、有效期、沟通档案总结项。</span></div>
+        </div>
+      </div>
+
+      <div class="prompt-card">
+        <h3><span class="num">J</span>示例 Prompt 模板</h3>
+        <div class="prompt-code">你是证券财富管理场景下的“客户经营会话分析助手”。
+你的任务是基于本次财富顾问与客户的通话转写文本，识别客户真实意图，并按照标准标签字典完成“客户标签映射”和“沟通档案总结”。其中，投资兴趣、产品偏好、风险倾向、资金计划进入客户标签；服务需求、异议顾虑、流失风险、待跟进事项进入“用户沟通展示档案”的总结项。
+
+【输入控制原则】
+为控制上下文窗口占用，本 Prompt 只接收完成本次分析所必需的轻量信息：客户基础信息、已有客户标签、标准标签字典和本次 ASR 转写文本。不要要求传入通话元数据、历史沟通摘要、ASR 低置信度片段或完整历史对话。历史信息应先由系统侧沉淀为“已有客户标签”后再输入。
+
+【重要边界】
+1. 你只能做会话分析、标签抽取、摘要生成和待办建议，不得直接给出投资建议。
+2. 不得承诺收益，不得替代适当性判断，不得诱导客户购买具体产品。
+3. 对产品推荐、权限开通、风险测评等动作，只能生成“建议顾问确认后跟进”。
+4. 如果本次会话证据不足，必须输出低置信度或“不生成标签”，不得依赖未输入的历史信息进行补充推断。
+5. 客户画像标签必须优先来自标准标签字典，不能随意创造标签。
+6. 顾问发言只能作为理解上下文，不能作为客户标签证据；客户标签证据必须来自客户发言。
+
+【输入信息】
+客户基础信息：{{customer_profile}}
+已有客户标签：{{existing_tags}}
+标准标签字典：{{tag_dictionary}}
+本次 ASR 转写文本：{{asr_transcript}}
+
+【标准标签字典建议结构】
+标签字典建议按以下结构提供，便于模型做稳定映射：
+{
+  "投资兴趣": [
+    {
+      "tag_name": "港股通关注",
+      "definition": "客户主动询问港股通、跨境投资或相关开通流程",
+      "trigger_conditions": ["询问港股通", "了解开通流程", "关注港股市场"],
+      "exclude_conditions": ["仅顾问单方面介绍", "客户明确表示不感兴趣"],
+      "example_phrases": ["港股通怎么开", "我想了解一下港股通"]
+    }
+  ],
+  "产品偏好": [],
+  "风险倾向": [],
+  "资金计划": [],
+  "服务需求": [],
+  "异议顾虑": [],
+  "流失风险": [],
+  "待跟进事项": []
+}
+
+【需要识别的信息类别】
+请从本次客户发言中识别以下 8 类信息：
+1. 投资兴趣：客户关注的市场、品种、业务或投资方向，例如基金、ETF、港股通、两融、固收等。
+2. 产品偏好：客户对产品期限、收益形态、流动性、波动水平、持有方式等方面的偏好。
+3. 风险倾向：客户对亏损、波动、回撤、保守/进取风格的表达。
+4. 资金计划：客户关于新增资金、赎回、调仓、短期用款、资金到账等计划。
+5. 服务需求：客户希望顾问提供的解释、资料、操作指导、资讯同步或沟通方式。
+6. 异议顾虑：客户对产品、市场、费用、期限、流动性、风险、规则等方面的担心或反对意见。
+7. 流失风险：客户表达资产转出、竞品比较、强烈不满、投诉倾向、长期不回应等风险信号。
+8. 待跟进事项：客户明确或隐含需要顾问后续完成的动作，例如发送材料、回访、协助开通、提醒风险测评。
+
+【客户标签与沟通档案边界】
+- “投资兴趣 / 产品偏好 / 风险倾向 / 资金计划”是客户标签体系的 4 类核心经营标签，匹配成功后输出到 tags。
+- “服务需求 / 异议顾虑 / 流失风险 / 待跟进事项”不作为客户画像标签入库，而是输出到 communication_profile，作为用户沟通展示档案的总结项。
+- 如果标签字典中包含 8 类信息，也必须按上述边界处理：前 4 类进入 tags，后 4 类进入 communication_profile。
+
+【标签字典映射规则】
+1. 先做语义理解，再做字典匹配：不要因为客户原话中出现某个关键词就直接打标签，必须结合上下文判断真实含义。
+2. 只允许将客户标签映射到标准标签字典中已有的标签名；标签名、标签类别必须与字典保持一致。
+3. 匹配时依次参考：标签类别 → 标签定义 → 触发条件 → 排除条件 → 示例话术。
+4. 如果多个标签相似，选择证据最直接、定义最匹配的标签；仍无法区分时输出低置信度，并要求顾问确认。
+5. 如果客户表达明确但字典没有合适标签：不要强行映射到相近标签，应放入 candidate_new_tags，并说明建议新增原因。
+6. 服务需求、异议顾虑、流失风险、待跟进事项即使能匹配字典，也只进入 communication_profile，不进入 tags。
+
+【分析任务】
+请按以下步骤处理：
+1. 判断本次沟通场景：产品咨询 / 市场观点 / 业务办理 / 风险提示 / 客户维护 / 投诉反馈 / 其他。
+2. 只基于“客户发言”抽取客户意图；顾问发言只能作为当前会话上下文，不得作为客户偏好的直接证据。
+3. 按“需要识别的信息类别”逐项扫描客户发言，识别 8 类信息。
+4. 对投资兴趣、产品偏好、风险倾向、资金计划进行标准标签字典映射；每个标签必须给出触发原话、对话轮次、标签类别、字典匹配依据、置信度和判断理由；不得引用未输入的历史摘要或通话元数据。
+5. 将服务需求、异议顾虑、流失风险、待跟进事项整理为 communication_profile 总结项，并尽量保留证据句或动作建议。
+6. 判断标签类型：
+   - short_term_intent：短期意图，来自本次会话的即时需求或阶段性计划；
+   - long_term_preference_candidate：长期偏好候选，来自本次会话但尚未被已有标签或顾问确认验证；
+   - long_term_preference：长期偏好，必须能被已有客户标签、业务行为标签或顾问确认信息支持。
+7. 判断标签是否需要顾问确认：高影响、低置信度、涉及产品适配、涉及长期偏好沉淀的标签必须需要确认。
+8. 生成本次沟通摘要和建议下一步动作。
+
+【置信度规则】
+- 0.85-1.00：客户明确表达，且本次转写内容足够清晰，可作为强标签候选。
+- 0.65-0.84：客户表达较明确，但仍需顾问确认。
+- 0.40-0.64：弱意图，仅作为提示，不进入核心画像。
+- 0.00-0.39：证据不足，不生成标签。
+
+【短期意图与长期偏好判断规则】
+- 单次通话出现的资金安排、近期咨询、临时拒绝、资料需求，默认归为短期意图。
+- 在不传入历史沟通摘要的前提下，只有当本次表达与已有客户标签、交易行为、资产配置、风险测评或顾问确认信息一致时，才能归为长期偏好；否则只能归为长期偏好候选。
+- 短期意图必须给出有效期，默认 30 天；资金使用计划、回访待办可设置 7-30 天。
+- 长期偏好必须给出依据类型：已有标签印证 / 行为数据 / 顾问确认 / 风险等级印证。
+
+【输出格式】
+请严格输出 JSON，不要输出额外解释：
+{
+  "conversation_scene": "",
+  "summary": {
+    "topic": "",
+    "customer_needs": [],
+    "customer_concerns": [],
+    "advisor_response": [],
+    "next_best_actions": []
+  },
+  "tags": [
+    {
+      "tag_name": "",
+      "tag_category": "投资兴趣/产品偏好/风险倾向/资金计划",
+      "tag_type": "short_term_intent/long_term_preference_candidate/long_term_preference",
+      "confidence": 0.0,
+      "evidence_sentence": "客户原话",
+      "dialogue_turn": "",
+      "dictionary_mapping_basis": "匹配到该标签的字典定义/触发条件/排除条件判断",
+      "reason": "",
+      "validity_days": 30,
+      "need_advisor_confirm": true,
+      "action_suggestion": ""
+    }
+  ],
+  "communication_profile": {
+    "service_needs": [
+      {"summary": "", "evidence_sentence": "客户原话", "action_suggestion": ""}
+    ],
+    "objections_or_concerns": [
+      {"summary": "", "evidence_sentence": "客户原话", "severity": "low/medium/high"}
+    ],
+    "churn_risk_signals": [
+      {"summary": "", "evidence_sentence": "客户原话", "severity": "low/medium/high"}
+    ],
+    "follow_up_tasks": [
+      {"task": "", "evidence_sentence": "客户原话", "suggested_due_days": 7, "need_advisor_confirm": true}
+    ]
+  },
+  "candidate_new_tags": [
+    {"tag_name": "", "tag_category": "投资兴趣/产品偏好/风险倾向/资金计划", "evidence_sentence": "客户原话", "reason_for_new_tag": ""}
+  ],
+  "not_generated_reasons": [],
+  "compliance_notes": []
+}
+
+</div>
+      </div>
+    </section>
+
+
+    <h2 class="section-title">简单 Demo：从一段通话到“一户一档”结构化更新</h2>
+    <section class="demo-section">
+      <div class="demo-card">
+        <h3><span class="num">D</span>模拟输入：轻量化 ASR 转写文本</h3>
+        <div class="demo-meta">
+          <div class="meta-item"><b>客户基础信息</b><span>张先生</span></div>
+          <div class="meta-item"><b>已有标签</b><span>稳健倾向</span></div>
+          <div class="meta-item"><b>标签字典</b><span>8 类标准字典</span></div>
+          <div class="meta-item"><b>输入文本</b><span>本次 ASR</span></div>
+        </div>
+        <div class="demo-transcript">
+          <div class="talk"><div class="speaker advisor">顾问</div><div class="bubble">张先生您好，最近市场波动比较大，想跟您同步一下账户情况，也看下近期有没有新的资金安排。</div></div>
+          <div class="talk"><div class="speaker customer">客户</div><div class="bubble">最近我还是不太想冒风险，股票这块先不加了。有没有稳一点、期限短一点的产品？收益比活期高一些就行。</div></div>
+          <div class="talk"><div class="speaker advisor">顾问</div><div class="bubble">明白，您更关注稳健和流动性。我可以先整理一些低波动、短期限的产品资料给您参考。</div></div>
+          <div class="talk"><div class="speaker customer">客户</div><div class="bubble">可以。另外我下个月可能要用一部分钱，所以最好不要锁太久。还有上次你说的港股通，我想了解一下怎么开，但现在不一定马上做。</div></div>
+          <div class="talk"><div class="speaker advisor">顾问</div><div class="bubble">好的，我后续把港股通开通流程和风险提示材料一起发您，您看完后我们再约时间沟通。</div></div>
+          <div class="talk"><div class="speaker customer">客户</div><div class="bubble">可以，先发我企微吧。最近市场波动太大，我还是想保守一点。</div></div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-toolbar">
+          <h3 style="margin:0"><span class="num">AI</span>模拟输出：客户标签 + 沟通展示档案</h3>
+          <button class="demo-btn" onclick="document.getElementById('demoJson').classList.toggle('show-json')">查看 JSON</button>
+        </div>
+        <div class="demo-output">
+          <div class="demo-summary">
+            <b>沟通摘要：</b>客户表达近期风险偏好偏保守，明确关注稳健、短期限、高流动性产品；因下个月可能有资金使用计划，暂不适合长期锁定产品。同时客户对港股通开通流程有初步了解意向，但尚未形成强交易意图。
+          </div>
+          <div class="demo-tags">
+            <div class="demo-tag"><div><b>风险倾向｜低风险偏好</b><br/><span>证据：“不太想冒风险”“想保守一点”</span></div><span>置信度 0.82<br/>需顾问确认</span><div class="score"><i style="width:82%"></i></div></div>
+            <div class="demo-tag"><div><b>产品偏好｜短期限 / 高流动性</b><br/><span>证据：“期限短一点”“不要锁太久”</span></div><span>置信度 0.91<br/>有效期 30 天</span><div class="score"><i style="width:91%"></i></div></div>
+            <div class="demo-tag"><div><b>资金计划｜短期用款</b><br/><span>证据：“下个月可能要用一部分钱”</span></div><span>置信度 0.88<br/>有效期 30 天</span><div class="score"><i style="width:88%"></i></div></div>
+            <div class="demo-tag"><div><b>投资兴趣｜港股通关注</b><br/><span>证据：“想了解一下怎么开，但现在不一定马上做”</span></div><span>置信度 0.74<br/>弱意图</span><div class="score"><i style="width:74%"></i></div></div>
+          </div>
+          <div class="profile-summary" style="grid-template-columns:repeat(2,1fr);margin-top:2px">
+            <div class="summarybox"><b>服务需求</b><p>客户希望通过企微接收资料，并在阅读后再沟通；偏好低打扰、资料先行的服务方式。</p></div>
+            <div class="summarybox"><b>异议顾虑</b><p>主要顾虑为市场波动、产品期限过长和流动性不足；暂不适合长期锁定型产品沟通。</p></div>
+            <div class="summarybox"><b>流失风险</b><p>未出现明确资产转出或投诉信号，但客户对波动较敏感，需避免强推高波动产品。</p></div>
+            <div class="summarybox"><b>待跟进事项</b><p>发送短期限低波动产品资料、港股通开通流程和风险揭示材料；7 日后企微回访。</p></div>
+          </div>
+          <div class="badge-row"><span class="badge">会话场景：产品咨询 + 客户维护</span><span class="badge">标签映射：8 类识别，4 类入画像</span><span class="badge">沟通档案：总结项随会话更新</span></div>
+          <div id="demoJson" class="demo-json hidden-json">{
+  "conversation_scene": "产品咨询/客户维护",
+  "summary": {
+    "topic": "稳健短期限产品咨询与港股通开通了解",
+    "customer_needs": ["稳健理财", "短期限产品", "港股通开通流程"],
+    "customer_concerns": ["市场波动", "资金流动性", "长期锁定"],
+    "next_best_actions": ["发送产品资料", "发送港股通开通流程", "7日后企微回访"]
+  },
+  "tags": [
+    {
+      "tag_name": "低风险偏好",
+      "tag_category": "风险倾向",
+      "tag_type": "long_term_preference_candidate",
+      "confidence": 0.82,
+      "evidence_sentence": "最近我还是不太想冒风险。",
+      "validity_days": 90,
+      "need_advisor_confirm": true,
+      "dictionary_mapping_basis": "匹配风险倾向类标签：客户多次表达不想冒风险、想保守一点，符合低风险偏好触发条件"
+    },
+    {
+      "tag_name": "短期限/高流动性产品偏好",
+      "tag_category": "产品偏好",
+      "tag_type": "short_term_intent",
+      "confidence": 0.91,
+      "evidence_sentence": "有没有稳一点、期限短一点的产品？",
+      "validity_days": 30,
+      "need_advisor_confirm": false,
+      "dictionary_mapping_basis": "匹配产品偏好类标签：客户明确提出期限短、不要锁太久，符合短期限/高流动性触发条件"
+    },
+    {
+      "tag_name": "短期用款",
+      "tag_category": "资金计划",
+      "tag_type": "short_term_intent",
+      "confidence": 0.88,
+      "evidence_sentence": "下个月可能要用一部分钱。",
+      "validity_days": 30,
+      "need_advisor_confirm": false,
+      "dictionary_mapping_basis": "匹配资金计划类标签：客户明确提出下个月可能用钱，符合短期用款触发条件"
+    },
+    {
+      "tag_name": "港股通关注",
+      "tag_category": "投资兴趣",
+      "tag_type": "short_term_intent",
+      "confidence": 0.74,
+      "evidence_sentence": "我想了解一下怎么开，但现在不一定马上做。",
+      "validity_days": 30,
+      "need_advisor_confirm": true,
+      "dictionary_mapping_basis": "匹配投资兴趣类标签：客户主动询问港股通开通方式，但表达暂不一定马上做，故为弱意图"
+    }
+  ],
+  "communication_profile": {
+    "service_needs": [{"summary": "企微发送资料，资料先行后续沟通", "evidence_sentence": "可以，先发我企微吧。", "action_suggestion": "通过企微发送资料"}],
+    "objections_or_concerns": [{"summary": "担心市场波动、长期锁定和流动性不足", "evidence_sentence": "市场波动太大，我还是想保守一点。", "severity": "medium"}],
+    "churn_risk_signals": [{"summary": "无明确流失信号；客户对波动敏感，需避免高波动产品强推", "evidence_sentence": "股票这块先不加了。", "severity": "low"}],
+    "follow_up_tasks": [
+      {"task": "发送短期限低波动产品资料", "evidence_sentence": "先发我企微吧。", "suggested_due_days": 1, "need_advisor_confirm": true},
+      {"task": "发送港股通开通流程和风险揭示材料", "evidence_sentence": "我想了解一下怎么开。", "suggested_due_days": 1, "need_advisor_confirm": true},
+      {"task": "7日后企微回访", "evidence_sentence": "您看完后我们再约时间沟通。", "suggested_due_days": 7, "need_advisor_confirm": true}
+    ]
+  },
+  "candidate_new_tags": [],
+  "compliance_notes": ["仅生成经营线索，不构成投资建议", "产品资料发送前需校验客户风险等级与适当性"]
+}</div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="value-row">
+      <div class="value"><div class="icon">🎙️</div><b>语音数据资产化</b><p>将沉睡录音转化为可检索、可分析、可运营的客户标签与沟通记录。</p></div>
+      <div class="value"><div class="icon">🎯</div><b>标签准确性可运营</b><p>通过证据句、置信度、人工确认和抽样标注，持续降低误判与过度推断。</p></div>
+      <div class="value"><div class="icon">🏷️</div><b>画像动态更新</b><p>用标签来源、有效期、权重和冲突校验，区分短期需求与长期偏好。</p></div>
+      <div class="value"><div class="icon">🔁</div><b>全域运营基础</b><p>标签可延展至 APP 推荐、企微触达、智能外呼、客户分群和经营策略优化。</p></div>
+    </section>
+
+    <section class="footer">
+      <span><strong>合规边界：</strong>智能体定位为客户意图识别与经营线索沉淀，不替代投顾建议；产品推荐、风险提示和业务动作均需顾问确认，并保留标签生成与采纳日志用于审计。</span>
+      <span class="right">项目关键词：ASR｜LLM｜标签治理｜客户画像｜DataOps</span>
+    </section>
+  </main>
+</body>
+</html>
